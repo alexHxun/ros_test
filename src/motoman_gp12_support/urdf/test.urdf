@@ -1,0 +1,15 @@
+cat > /tmp/tiny_robot.urdf <<'U'
+<?xml version="1.0"?>
+<robot name="tiny">
+  <link name="base"/>
+  <link name="link1">
+    <visual><geometry><box size="0.1 0.1 0.1"/></geometry></visual>
+  </link>
+  <joint name="j1" type="fixed"><parent link="base"/><child link="link1"/></joint>
+</robot>
+U
+
+export QT_QPA_PLATFORM=xcb
+export LIBGL_ALWAYS_SOFTWARE=1
+
+ros2 launch moveit_setup_assistant setup_assistant.launch.py urdf_filename:=/tmp/tiny_robot.urdf
